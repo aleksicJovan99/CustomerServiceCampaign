@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "JEH8LTIlByYk/Q65CHQhYPRPlVFVEV8IjxxUq/9T9cw=",
+  "Source": "CustomerServiceCampaign.Api",
+  "BasePath": "_content/CustomerServiceCampaign.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

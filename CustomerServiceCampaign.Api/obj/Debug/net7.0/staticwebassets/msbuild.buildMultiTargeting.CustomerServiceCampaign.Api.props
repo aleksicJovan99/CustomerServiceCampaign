@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/CustomerServiceCampaign.Api.props" />
+</Project>
