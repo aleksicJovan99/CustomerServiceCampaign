@@ -10,3 +10,6 @@
 /Users/jovan/Documents/c#/CustomerServiceCampaign/Contracts/obj/Debug/net7.0/refint/Contracts.dll
 /Users/jovan/Documents/c#/CustomerServiceCampaign/Contracts/obj/Debug/net7.0/Contracts.pdb
 /Users/jovan/Documents/c#/CustomerServiceCampaign/Contracts/obj/Debug/net7.0/ref/Contracts.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Contracts/bin/Debug/net7.0/Entities.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Contracts/bin/Debug/net7.0/Entities.pdb
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Contracts/obj/Debug/net7.0/Contracts.csproj.CopyComplete

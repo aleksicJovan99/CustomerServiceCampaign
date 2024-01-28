@@ -25,7 +25,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/Entities.csproj": {
+                "projectPath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/Entities.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -79,8 +83,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/Users/jovan/Documents/c#/CustomerServiceCampaign/LoggerService/LoggerService.csproj": {
-                "projectPath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/LoggerService/LoggerService.csproj"
+              "/Users/jovan/Documents/c#/CustomerServiceCampaign/Contracts/Contracts.csproj": {
+                "projectPath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/Contracts/Contracts.csproj"
+              },
+              "/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/Entities.csproj": {
+                "projectPath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/Entities.csproj"
               }
             }
           }
@@ -98,6 +105,16 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.15, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",
@@ -131,14 +148,14 @@
         }
       }
     },
-    "/Users/jovan/Documents/c#/CustomerServiceCampaign/LoggerService/LoggerService.csproj": {
+    "/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/jovan/Documents/c#/CustomerServiceCampaign/LoggerService/LoggerService.csproj",
-        "projectName": "LoggerService",
-        "projectPath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/LoggerService/LoggerService.csproj",
+        "projectUniqueName": "/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/Entities.csproj",
+        "projectName": "Entities",
+        "projectPath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/Entities.csproj",
         "packagesPath": "/Users/jovan/.nuget/packages/",
-        "outputPath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/LoggerService/obj/",
+        "outputPath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/jovan/.nuget/NuGet/NuGet.Config"
@@ -152,11 +169,7 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {
-              "/Users/jovan/Documents/c#/CustomerServiceCampaign/Contracts/Contracts.csproj": {
-                "projectPath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/Contracts/Contracts.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -169,9 +182,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "NLog.Extensions.Logging": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.3.8, )"
+              "version": "[7.0.15, )"
             }
           },
           "imports": [

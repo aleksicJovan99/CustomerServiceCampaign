@@ -1,0 +1,12 @@
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/bin/Debug/net7.0/Entities.deps.json
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/bin/Debug/net7.0/Entities.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/bin/Debug/net7.0/Entities.pdb
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/obj/Debug/net7.0/Entities.csproj.AssemblyReference.cache
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/obj/Debug/net7.0/Entities.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/obj/Debug/net7.0/Entities.AssemblyInfoInputs.cache
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/obj/Debug/net7.0/Entities.AssemblyInfo.cs
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/obj/Debug/net7.0/Entities.csproj.CoreCompileInputs.cache
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/obj/Debug/net7.0/Entities.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/obj/Debug/net7.0/refint/Entities.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/obj/Debug/net7.0/Entities.pdb
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Entities/obj/Debug/net7.0/ref/Entities.dll
