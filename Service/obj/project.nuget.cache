@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZQ5W6Hrgf+evhJ8xueVTQyAh8IoCSlH+2lr04duARoohzmjBaltKRe9fOsqUtzrn0EOC72tfb8qn9WbLbSya5w==",
+  "dgSpecHash": "iEGhhRsMKLrte1yHgZds+pMj9hbePfFS/0sV4hlbQKChk1NggKL7YAuSQmGv3KkMWbAkm9hZQ/UONYbAnV+/IA==",
   "success": true,
   "projectFilePath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/Service.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,8 @@
     "/Users/jovan/.nuget/packages/microsoft.entityframeworkcore.analyzers/7.0.15/microsoft.entityframeworkcore.analyzers.7.0.15.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.caching.abstractions/7.0.0/microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.caching.memory/7.0.0/microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.extensions.configuration/7.0.0/microsoft.extensions.configuration.7.0.0.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.extensions.configuration.abstractions/7.0.0/microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.dependencyinjection/7.0.0/microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/7.0.0/microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.logging/7.0.0/microsoft.extensions.logging.7.0.0.nupkg.sha512",
