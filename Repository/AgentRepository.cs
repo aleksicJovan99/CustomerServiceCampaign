@@ -18,7 +18,5 @@ public class AgentRepository : RepositoryBase<Agent>, IAgentRepository
         .SingleOrDefaultAsync();
 
     public async Task<IEnumerable<Agent>> GetAgentsAsync() =>
-        await FindAll()
-        .OrderBy(d => d.Id)
-        .ToListAsync();
+        await FindAll().ToListAsync();
 }

@@ -26,10 +26,18 @@ namespace CustomerServiceCampaign.Api.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("AgentId");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("AgentName");
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssn")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("varchar(9)");
 
                     b.HasKey("Id");
 

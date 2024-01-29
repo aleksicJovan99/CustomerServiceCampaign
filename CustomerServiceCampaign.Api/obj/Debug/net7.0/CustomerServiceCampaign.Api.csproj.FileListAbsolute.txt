@@ -69,3 +69,9 @@
 /Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/Entities.pdb
 /Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/Contracts.dll
 /Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/Contracts.pdb
+/Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/Repository.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/Service.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/Repository.pdb
+/Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/Service.pdb
+/Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/AutoMapper.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
