@@ -3,7 +3,9 @@
 namespace Contracts;
 public interface IAgentService
 {
-    Task<IEnumerable<Agent>> GetAgentsList();
-    Task<Agent> GetAgent();
+    Task<IEnumerable<AgentDto>> GetAgentsList();
+    Task<AgentDto> GetAgentById(Guid agentId);
+    Task<AgentDto> GetAgentBySsn(string agentSsn);
+
     Task<AgentForCreateDto?> CreateAgent(AgentForCreateDto agent);
 }

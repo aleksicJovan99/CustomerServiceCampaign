@@ -15,22 +15,46 @@ public class AgentController : ControllerBase
         _service = service;
     }
 
-    [HttpGet(Name = "Get Agents")]
+    [HttpGet(Name = "GetAgents")]
     public async Task<IActionResult> GetAgents()
-    {
-        try 
-        {
-            var result = await _service.GetAgentsList();
+    { 
+        var result = await _service.GetAgentsList();
 
-            return Ok(result);
-        }
-        catch (Exception ex)
+        if (result == null) { return BadRequest(); }
+            
+        return Ok(result);
+                
+    }
+
+    [HttpGet("id", Name = "GetAgentById")]
+    public async Task<IActionResult> GetAgentById(string id)
+    {
+        //Check if ID value is correct
+        if (Guid.TryParse(id, out Guid guidValue))
         {
-            Log.Error($"Something went wrong in the {nameof(GetAgents)} action {ex}");
-            return StatusCode(500, "Internal server error");
+            var agent = await _service.GetAgentById(guidValue);
+
+            if(agent == null) return BadRequest($"Agent with id({id}) doesn't exist");
+
+            return Ok(agent);
         }
+        else
+        {
+            return BadRequest("Invalid ID value");
+        }
+    }
+
+    [HttpGet("ssn", Name = "GetAgentBySsn")]
+    public async Task<IActionResult> GetAgentBySsn(string ssn)
+    {
+        var agent = await _service.GetAgentBySsn(ssn);
+
+        if(agent == null) return BadRequest($"Agent with ssn({ssn}) doesn't exist");
+
+        return Ok(agent);
         
     }
+    
 
     [HttpPost(Name = "Create Agent")]
     public async Task<IActionResult> CreateAgent(AgentForCreateDto agent)
