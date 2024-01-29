@@ -20,7 +20,7 @@ public class AgentController : ControllerBase
     {
         try 
         {
-            var result = await _service.GetAgents();
+            var result = await _service.GetAgentsList();
 
             return Ok(result);
         }
@@ -44,7 +44,7 @@ public class AgentController : ControllerBase
 
         var result = await _service.CreateAgent(agent);
 
-        if (result.Ssn == string.Empty) 
+        if (result == null) 
         {
             Log.Warning($"An agent with this SSN({agent.Ssn}) already exists");
             return BadRequest($"An agent with this SSN({agent.Ssn}) already exists");

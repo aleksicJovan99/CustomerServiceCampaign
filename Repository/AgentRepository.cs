@@ -13,10 +13,15 @@ public class AgentRepository : RepositoryBase<Agent>, IAgentRepository
 
     public void DeleteAgent(Agent agent) => Delete(agent);
 
-    public async Task<Agent> GetAgentAsync(int agentId) =>
+    public async Task<Agent> GetAgentByIdAsync(Guid agentId) =>
         await FindByCondition(d => d.Id.Equals(agentId))
         .SingleOrDefaultAsync();
 
+    public async Task<Agent> GetAgentBySsnAsync(string agentSsn) =>
+        await FindByCondition(d => d.Ssn.Equals(agentSsn))
+        .SingleOrDefaultAsync();
+
     public async Task<IEnumerable<Agent>> GetAgentsAsync() =>
-        await FindAll().ToListAsync();
+        await FindAll()
+        .ToListAsync();
 }

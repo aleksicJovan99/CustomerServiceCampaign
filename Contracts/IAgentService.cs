@@ -3,7 +3,7 @@
 namespace Contracts;
 public interface IAgentService
 {
-    Task<IEnumerable<Agent>> GetAgents();
+    Task<IEnumerable<Agent>> GetAgentsList();
     Task<Agent> GetAgent();
-    Task<AgentForCreateDto> CreateAgent(AgentForCreateDto agent);
+    Task<AgentForCreateDto?> CreateAgent(AgentForCreateDto agent);
 }

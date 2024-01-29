@@ -14,22 +14,21 @@ public class AgentService : IAgentService
         _mapper = mapper;
     }
 
-    public async Task<AgentForCreateDto> CreateAgent(AgentForCreateDto agentDto)
+    public async Task<AgentForCreateDto?> CreateAgent(AgentForCreateDto agentDto)
     {
-        var agent = _mapper.Map<Agent>(agentDto);
-        var agents = await _repository.Agent.GetAgentsAsync();
+        var agentCheck = await _repository.Agent.GetAgentBySsnAsync(agentDto.Ssn);
 
-        var exist = agents.Any(a => a.Ssn == agent.Ssn);
-
-        if (!exist) 
+        if (agentCheck == null) 
         {
-            _repository.Agent.CreateAgent(agent);
+            var agentMapped = _mapper.Map<Agent>(agentDto);
+            _repository.Agent.CreateAgent(agentMapped);
             await _repository.SaveAsync();
+
             return agentDto;
         }
         else
         {
-            return new AgentForCreateDto();
+            return null;
         }
 
        
@@ -40,7 +39,7 @@ public class AgentService : IAgentService
         throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Agent>> GetAgents()
+    public async Task<IEnumerable<Agent>> GetAgentsList()
     {
         var agents = await _repository.Agent.GetAgentsAsync();
 

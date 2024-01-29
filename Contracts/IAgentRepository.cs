@@ -4,7 +4,8 @@ namespace Contracts;
 public interface IAgentRepository
 {
     Task<IEnumerable<Agent>> GetAgentsAsync();
-    Task<Agent> GetAgentAsync(int agentId);
+    Task<Agent> GetAgentByIdAsync(Guid agentId);
+    Task<Agent> GetAgentBySsnAsync(string agentSsn);
     void CreateAgent(Agent director);
     void DeleteAgent(Agent agent);
 }
