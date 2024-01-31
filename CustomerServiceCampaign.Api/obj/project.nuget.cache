@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pDpL7vdnHbC6zwsqXEhUEQwLoxg3i4y/OjgLYg1ufQ7/0dQolkIMCmjo6T6LA4C8Xw/nDIAUYDv08uVWxTCeRw==",
+  "dgSpecHash": "F3Tnjv8SPVLALi0OXxOLWsuqGRzCu4cIDkSFZlZ7mrZZnUAr2qBGtI5qGaO91nnYvqBhgMn6Z6Su9mgSdci+9w==",
   "success": true,
   "projectFilePath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/CustomerServiceCampaign.Api.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,9 @@
     "/Users/jovan/.nuget/packages/k4os.compression.lz4/1.3.5/k4os.compression.lz4.1.3.5.nupkg.sha512",
     "/Users/jovan/.nuget/packages/k4os.compression.lz4.streams/1.3.5/k4os.compression.lz4.streams.1.3.5.nupkg.sha512",
     "/Users/jovan/.nuget/packages/k4os.hash.xxhash/1.0.8/k4os.hash.xxhash.1.0.8.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.aspnetcore.cryptography.internal/7.0.15/microsoft.aspnetcore.cryptography.internal.7.0.15.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/7.0.15/microsoft.aspnetcore.cryptography.keyderivation.7.0.15.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/7.0.15/microsoft.aspnetcore.identity.entityframeworkcore.7.0.15.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.aspnetcore.openapi/7.0.4/microsoft.aspnetcore.openapi.7.0.4.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
@@ -36,6 +39,8 @@
     "/Users/jovan/.nuget/packages/microsoft.extensions.diagnostics.abstractions/8.0.0/microsoft.extensions.diagnostics.abstractions.8.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.fileproviders.abstractions/8.0.0/microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.hosting.abstractions/8.0.0/microsoft.extensions.hosting.abstractions.8.0.0.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.extensions.identity.core/7.0.15/microsoft.extensions.identity.core.7.0.15.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.extensions.identity.stores/7.0.15/microsoft.extensions.identity.stores.7.0.15.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.logging/8.0.0/microsoft.extensions.logging.8.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0/microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.options/8.0.0/microsoft.extensions.options.8.0.0.nupkg.sha512",
