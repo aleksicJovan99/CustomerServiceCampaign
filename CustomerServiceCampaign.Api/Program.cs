@@ -1,6 +1,8 @@
+using Contracts;
 using CustomerServiceCampaign.Api;
-using LoggerService;
+using Repository;
 using Serilog;
+using Service;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddCors();
 builder.Services.AddControllers();
+builder.Services.ConfigureSqlContext(builder.Configuration);
+builder.Services.AddDataProtection();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+builder.Services.AddScoped<IAgentService, AgentService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

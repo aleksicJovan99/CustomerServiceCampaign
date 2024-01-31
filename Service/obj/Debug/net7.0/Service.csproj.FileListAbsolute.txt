@@ -1,0 +1,17 @@
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/bin/Debug/net7.0/Service.deps.json
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/bin/Debug/net7.0/Service.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/bin/Debug/net7.0/Service.pdb
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/bin/Debug/net7.0/Contracts.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/bin/Debug/net7.0/Entities.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/bin/Debug/net7.0/Contracts.pdb
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/bin/Debug/net7.0/Entities.pdb
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/obj/Debug/net7.0/Service.csproj.AssemblyReference.cache
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/obj/Debug/net7.0/Service.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/obj/Debug/net7.0/Service.AssemblyInfoInputs.cache
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/obj/Debug/net7.0/Service.AssemblyInfo.cs
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/obj/Debug/net7.0/Service.csproj.CoreCompileInputs.cache
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/obj/Debug/net7.0/Service.csproj.CopyComplete
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/obj/Debug/net7.0/Service.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/obj/Debug/net7.0/refint/Service.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/obj/Debug/net7.0/Service.pdb
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/obj/Debug/net7.0/ref/Service.dll
