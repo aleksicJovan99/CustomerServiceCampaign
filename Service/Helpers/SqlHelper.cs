@@ -19,11 +19,6 @@ public static class SqlHelper
             {
                 string columnName = pair.Key;
 
-                if (pair.Key == "Picture") {
-                    
-                    var a = 5;
-                    };
-
                 if (!IsColumnExists(columnName, tableName, connection))
                 {
                     // Column doesn't exist, so add it to the table
