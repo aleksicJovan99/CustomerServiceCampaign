@@ -19,15 +19,12 @@ public class AgentService : IAgentService
     // Method to create a new agent
     public async Task<AgentForCreateDto?> CreateAgent(AgentForCreateDto agentDto)
     {
-        // Encrypt the SSN using EncryptHelper
-        var encryptedSsn = EncryptHelper.EncryptDataBase64(agentDto.Ssn);
-
+        
         // Check if an agent with the same SSN already exists
-        var agentCheck = await _repository.Agent.GetAgentBySsnAsync(encryptedSsn);
+        var agentCheck = await _repository.Agent.GetAgentBySsnAsync(agentDto.Ssn);
 
         if (agentCheck != null) return null;
         
-        agentDto.Ssn = encryptedSsn;
         var agentMapped = _mapper.Map<Agent>(agentDto);
         _repository.Agent.CreateAgent(agentMapped);
         await _repository.SaveAsync();
@@ -43,7 +40,6 @@ public class AgentService : IAgentService
 
         if (agent == null) return null;
 
-        agent.Ssn = EncryptHelper.DecryptDataBase64(agent.Ssn);
         var result = _mapper.Map<AgentDto>(agent);
 
         return result;
@@ -52,34 +48,23 @@ public class AgentService : IAgentService
     // Method to get agent by SSN number
     public async Task<AgentDto> GetAgentBySsn(string agentSsn)
     {
-        var encryptedSsn = EncryptHelper.EncryptDataBase64(agentSsn);
-        var agent = await _repository.Agent.GetAgentBySsnAsync(encryptedSsn);
+        var agent = await _repository.Agent.GetAgentBySsnAsync(agentSsn);
 
         if (agent == null) return null;
 
-        agent.Ssn = EncryptHelper.DecryptDataBase64(agent.Ssn);
         var result = _mapper.Map<AgentDto>(agent);
 
         return result;
     }
 
-    // Method to get a list of agents with decrypted SSN
+    // Method to get a list of agents
     public async Task<IEnumerable<AgentDto>> GetAgentsList()
     {
         var agents = await _repository.Agent.GetAgentsAsync();
 
         if (agents == null) { return null; }
 
-        var result = new List<AgentDto>();
-
-        // Decrypt the SSN property of each agent and add it to the result list
-        foreach(var agent in agents)
-        {
-            agent.Ssn = EncryptHelper.DecryptDataBase64(agent.Ssn);
-            var agentMapped = _mapper.Map<AgentDto>(agent);
-
-            result.Add(agentMapped);
-        }
+        var result = _mapper.Map<IEnumerable<AgentDto>>(agents);
 
         return result;
     }
