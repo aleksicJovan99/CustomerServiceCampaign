@@ -200,14 +200,14 @@ namespace CustomerServiceCampaign.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bf97f7e8-1632-4251-a82a-9f8a108f292a",
-                            Name = "Agent",
+                            Id = "235dbce4-31d7-4c39-b0d3-25172c29e0a4",
+                            Name = "agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "b3faa546-f036-4176-8fe0-74ac3c93305b",
-                            Name = "SysAdmin",
+                            Id = "f97982cd-f912-487e-82d3-cad38aabd4cf",
+                            Name = "sysadmin",
                             NormalizedName = "SYSADMIN"
                         });
                 });

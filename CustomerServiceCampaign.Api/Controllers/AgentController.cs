@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -15,7 +16,7 @@ public class AgentController : ControllerBase
         _service = service;
     }
 
-    [HttpGet(Name = "GetAgents")]
+    [HttpGet(Name = "GetAgents"), Authorize]
     public async Task<IActionResult> GetAgents()
     { 
         var result = await _service.GetAgentsList();

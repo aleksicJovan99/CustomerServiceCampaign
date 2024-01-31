@@ -10,12 +10,12 @@ public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
         builder.HasData(
         new IdentityRole 
         {
-            Name = "Agent",
+            Name = "agent",
             NormalizedName = "AGENT" 
         },
         new IdentityRole 
         {
-            Name = "SysAdmin",
+            Name = "sysadmin",
             NormalizedName = "SYSADMIN" 
         });
     }

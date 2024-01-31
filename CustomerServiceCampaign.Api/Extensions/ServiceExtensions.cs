@@ -1,6 +1,9 @@
-﻿using Entities;
+﻿using System.Text;
+using Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CustomerServiceCampaign.Api;
 public static class ServiceExtensions
@@ -37,5 +40,33 @@ public static class ServiceExtensions
         builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
         builder.AddEntityFrameworkStores<RepositoryContext>()
             .AddDefaultTokenProviders();
-    }    
+    }
+
+    // Configures JSON Web Token (JWT) authentication
+    public static void ConfigureJWT(this IServiceCollection services, 
+    IConfiguration configuration) 
+    {
+        var jwtSettings = configuration.GetSection("JwtSettings");
+        var secretKey = configuration.GetSection("AppSettings:Token").Value!;
+
+        services.AddAuthentication(o => {
+            o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options => 
+        {
+            options.TokenValidationParameters = new TokenValidationParameters 
+            {
+                ValidateIssuer = false, 
+                ValidateAudience = true, 
+                ValidateLifetime = true, 
+                ValidateIssuerSigningKey = true,
+
+                //ValidIssuer = jwtSettings.GetSection("validIssuer").Value, 
+                ValidAudience = jwtSettings.GetSection("validAudience").Value, 
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)) 
+            };
+        });
+    }
+    
 }

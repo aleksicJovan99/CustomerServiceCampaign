@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Wt7i0j7oBU6b9i5hZkHLP/IUSfT2z/pzYLVKLNeEGXkmSsAD/jajpmSrlx7QZIPeThMKQzaB89CdzLvp1h5f8Q==",
+  "dgSpecHash": "y9ziHnUri1kZmyp3ip3wh7iRyG4Ybxk/SQ5k2Ylppf39g0Z/td3yk5Z7I7YHLgdm9537dx/pn7K/NwxEKEb8Yg==",
   "success": true,
   "projectFilePath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/Tests/Tests.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "/Users/jovan/.nuget/packages/k4os.compression.lz4/1.3.5/k4os.compression.lz4.1.3.5.nupkg.sha512",
     "/Users/jovan/.nuget/packages/k4os.compression.lz4.streams/1.3.5/k4os.compression.lz4.streams.1.3.5.nupkg.sha512",
     "/Users/jovan/.nuget/packages/k4os.hash.xxhash/1.0.8/k4os.hash.xxhash.1.0.8.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.15/microsoft.aspnetcore.authentication.jwtbearer.7.0.15.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.aspnetcore.cryptography.internal/7.0.15/microsoft.aspnetcore.cryptography.internal.7.0.15.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/7.0.15/microsoft.aspnetcore.cryptography.keyderivation.7.0.15.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/7.0.15/microsoft.aspnetcore.identity.entityframeworkcore.7.0.15.nupkg.sha512",
