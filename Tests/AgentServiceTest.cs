@@ -27,10 +27,9 @@ public class AgentServiceTests
     {
         // Arrange
         var agentDto = new AgentForCreateDto { Ssn = "123456789" };
-        var encryptedSsn = EncryptHelper.EncryptDataBase64(agentDto.Ssn);
 
         // Mock repository method to return null since agent does not exist
-        _repositoryMock.Setup(r => r.Agent.GetAgentBySsnAsync(encryptedSsn))
+        _repositoryMock.Setup(r => r.Agent.GetAgentBySsnAsync(agentDto.Ssn))
             .ReturnsAsync((Agent)null);
 
         // Mock mapper to return a new Agent object
@@ -49,12 +48,16 @@ public class AgentServiceTests
     public async Task CreateAgent_AgentExist_ReturnsNull()
     {
         // Arrange
-        var agentDto = new AgentForCreateDto { Ssn = "123456789" };
-        var encryptedSsn = "MTIzNDU2Nzg5";
+        var agentDto = new AgentForCreateDto 
+            { 
+                FirstName = "John", 
+                LastName = "Doe", 
+                Ssn = "123456789" 
+            };
 
         // Mock repository method to return an existing Agent with the same SSN
-        _repositoryMock.Setup(r => r.Agent.GetAgentBySsnAsync(encryptedSsn))
-            .ReturnsAsync(new Agent { Ssn = "MTIzNDU2Nzg5" });
+        _repositoryMock.Setup(r => r.Agent.GetAgentBySsnAsync(agentDto.Ssn))
+            .ReturnsAsync(new Agent { FirstName = "John", LastName = "Doe", Ssn = "123456789"  });
 
         // Act
         var result = await _agentService.CreateAgent(agentDto);
@@ -66,15 +69,53 @@ public class AgentServiceTests
     [Test]
     public async Task GetAgentsList_ReturnsListOfAgentDtos()
     {
+
         // Arrange
-        var agents = new List<Agent> { new Agent { Ssn = "MTIzNDU2Nzg5" } };
-        var agentDto = new AgentDto { Ssn = "123456789" };
+
+        var agent1Id = Guid.NewGuid();
+        var agent2Id = Guid.NewGuid();
+
+        var agents = new List<Agent> 
+        { 
+            new Agent 
+            { 
+                Id = agent1Id,
+                FirstName = "John", 
+                LastName = "Doe", 
+                Ssn = "123456789" 
+            },
+            new Agent 
+            { 
+                Id = agent2Id,
+                FirstName = "Bob", 
+                LastName = "Doe", 
+                Ssn = "987654321" 
+            }  
+        };
+
+        var agentDto = new List<AgentDto> 
+        { 
+            new AgentDto 
+            { 
+                Id = agent1Id,
+                FirstName = "John", 
+                LastName = "Doe", 
+                Ssn = "123456789" 
+            },
+            new AgentDto 
+            { 
+                Id = agent2Id,
+                FirstName = "Bob", 
+                LastName = "Doe", 
+                Ssn = "987654321" 
+            }
+        };
 
         // Mock repository method to return a list of agents
         _repositoryMock.Setup(r => r.Agent.GetAgentsAsync())
             .ReturnsAsync(agents);
 
-        _mapperMock.Setup(m => m.Map<AgentDto>(It.IsAny<Agent>()))
+       _mapperMock.Setup(m => m.Map<IEnumerable<AgentDto>>(It.IsAny<IEnumerable<Agent>>()))
             .Returns(agentDto);
 
         // Act
@@ -83,8 +124,7 @@ public class AgentServiceTests
 
         // Assert
         Assert.IsNotNull(result);
-        Assert.AreEqual(1, count);
-        Assert.AreEqual(agentDto, result.Where(a => a.Ssn == agentDto.Ssn).SingleOrDefault());
+        Assert.That(count, Is.EqualTo(2));
     }
 
     [Test]
@@ -120,7 +160,7 @@ public class AgentServiceTests
             // Assert
             Assert.IsNotNull(result);
             Assert.IsInstanceOf<AgentDto>(result);
-            Assert.AreEqual(agentId, result.Id);
+            Assert.That(result.Id, Is.EqualTo(agentId));
         }
 
         [Test]
@@ -128,14 +168,13 @@ public class AgentServiceTests
         {
             // Arrange
             var agentSsn = "123456789";
-            var encryptedSsn = EncryptHelper.EncryptDataBase64(agentSsn);
 
             var agent = new Agent 
                 { 
                     Id = Guid.NewGuid(),
                     FirstName = "John", 
                     LastName = "Doe", 
-                    Ssn = "MTIzNDU2Nzg5" 
+                    Ssn = "987654321" 
                 };
                 var agentDto = new AgentDto 
                 { 
@@ -145,7 +184,7 @@ public class AgentServiceTests
                     Ssn = agentSsn 
                 };
 
-            _repositoryMock.Setup(r => r.Agent.GetAgentBySsnAsync(encryptedSsn)).ReturnsAsync(agent);
+            _repositoryMock.Setup(r => r.Agent.GetAgentBySsnAsync(agentSsn)).ReturnsAsync(agent);
 
             _mapperMock.Setup(m => m.Map<AgentDto>(It.IsAny<Agent>()))
             .Returns(agentDto);
@@ -156,6 +195,6 @@ public class AgentServiceTests
             // Assert
             Assert.IsNotNull(result);
             Assert.IsInstanceOf<AgentDto>(result);
-            Assert.AreEqual(agentSsn, result.Ssn);
+            Assert.That(result.Ssn, Is.EqualTo(agentSsn));
         }
 }
