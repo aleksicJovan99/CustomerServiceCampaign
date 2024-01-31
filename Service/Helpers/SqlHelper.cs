@@ -54,4 +54,10 @@ public static class SqlHelper
         MySqlCommand command = new MySqlCommand(query, connection);
         command.ExecuteNonQuery();
     }
+
+    public static string GetNullableString(MySqlDataReader reader, string columnName)
+    {
+        int columnIndex = reader.GetOrdinal(columnName);
+        return !reader.IsDBNull(columnIndex) ? reader.GetString(columnIndex) : null;
+    }
 }

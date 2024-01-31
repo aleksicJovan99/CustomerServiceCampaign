@@ -1,5 +1,6 @@
 ﻿namespace Contracts;
 public interface ICustomerService
 {
-    Task GetSourceCustomers(string connectionString);
+    Task ImportSourceCustomers(string connectionString);
+    Task<bool> UpdateCustomersTable(string connectionString);
 }

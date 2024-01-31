@@ -8,4 +8,5 @@ public class RepositoryContext : DbContext
     }
 
     public DbSet<Agent> Agents { get; set; }
+    public DbSet<Customer> Customers { get; set; }
 }

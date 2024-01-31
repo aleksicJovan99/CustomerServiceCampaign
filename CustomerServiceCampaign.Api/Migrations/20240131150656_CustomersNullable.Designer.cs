@@ -3,6 +3,7 @@ using System;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerServiceCampaign.Api.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240131150656_CustomersNullable")]
+    partial class CustomersNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,9 +53,6 @@ namespace CustomerServiceCampaign.Api.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("Birthdate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("DateImported")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("HomeCity")
