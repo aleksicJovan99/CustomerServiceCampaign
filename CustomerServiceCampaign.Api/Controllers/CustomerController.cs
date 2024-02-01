@@ -19,7 +19,18 @@ public class CustomerController : ControllerBase
         _configuration = configuration;
     }
 
-    // Get Customers from source
+    [HttpGet(Name = "GetCustomers")]
+    public async Task<IActionResult> GetCustomers()
+    { 
+        var result = await _service.GetCustomersList();
+
+        if (result == null) { return BadRequest(); }
+            
+        return Ok(result);
+                
+    }
+
+        // Imports Customers from source
     [HttpPost("source", Name = "ImportSourceCustomers"), Authorize]
     public async Task<IActionResult> ImportSourceCustomers()
     { 

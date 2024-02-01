@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Web;
 using System.Xml.Linq;
+using AutoMapper;
 using Contracts;
 using Entities;
 using MySql.Data.MySqlClient;
@@ -11,10 +12,13 @@ public class CustomerService : ICustomerService
 {
 
     private readonly IRepositoryManager _repository;
+    private readonly IMapper _mapper;
 
-    public CustomerService(IRepositoryManager repository)
+
+    public CustomerService(IRepositoryManager repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
     //add Customer to Loyalty Table
@@ -49,6 +53,17 @@ public class CustomerService : ICustomerService
         
         return forCreate;
         
+    }
+
+    public async Task<IEnumerable<CustomerDto>> GetCustomersList()
+    {
+        var customers = await _repository.Customer.GetCustomersAsync();
+
+        if (customers == null) { return null; }
+
+        var result = _mapper.Map<IEnumerable<CustomerDto>>(customers);
+
+        return result;
     }
 
     // Imports customers from a remote source
