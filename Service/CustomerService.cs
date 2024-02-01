@@ -8,7 +8,6 @@ using Contracts;
 using CsvHelper;
 using Entities;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Common;
 
 namespace Service;
 public class CustomerService : ICustomerService

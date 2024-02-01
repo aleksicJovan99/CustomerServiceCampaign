@@ -85,6 +85,7 @@ public static class SqlHelper
 
     private static void AddColumn(string columnName,string tableName, MySqlConnection connection)
     {
+        columnName = $"{char.ToUpper(columnName[0])}{columnName[1..]}";
         string query = $"ALTER TABLE {tableName} ADD {columnName} TEXT NULL";
         MySqlCommand command = new MySqlCommand(query, connection);
         command.ExecuteNonQuery();
