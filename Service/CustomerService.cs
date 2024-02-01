@@ -156,16 +156,20 @@ public class CustomerService : ICustomerService
                 {
                     while (reader.Read())
                     {
+                        var ssn = SqlHelper.GetNullableString(reader, "SSN");
+                        if (ssn == null) continue;
+
+                        ssn = ssn.Replace("-", "");
+
                         Guid customerId = Guid.TryParse(SqlHelper.
                             GetNullableString(reader, "Id"), out Guid result) ?  result : Guid.NewGuid();
+
                         
-                        var checkCustomer = await _repository.Customer.GetCustomerByIdAsync(customerId);
+                        var checkCustomer = await _repository.Customer.GetCustomersAsync();
 
-                        if(checkCustomer != null) continue;
+                        if(checkCustomer.Where(c => c.Id == customerId || c.SSN == ssn).Any()) continue;
 
-                        var ssn = SqlHelper.GetNullableString(reader, "SSN");
 
-                        if (ssn == null) continue;
 
                         DateTime? birthDate = DateTime.
                             TryParseExact(SqlHelper.GetNullableString(reader, "DOB"), "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out DateTime birth)
@@ -181,7 +185,7 @@ public class CustomerService : ICustomerService
                         {
                             Id = customerId,
                             Name = SqlHelper.GetNullableString(reader, "Name"),
-                            SSN = ssn.Replace("-", ""),
+                            SSN = ssn,
                             Birthdate = birthDate,
                             HomeStreet = SqlHelper.GetNullableString(reader, "HomeStreet"),
                             HomeCity = SqlHelper.GetNullableString(reader, "HomeCity"),
