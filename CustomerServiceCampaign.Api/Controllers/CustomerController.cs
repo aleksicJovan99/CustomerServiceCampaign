@@ -30,6 +30,35 @@ public class CustomerController : ControllerBase
                 
     }
 
+    [HttpGet("id", Name = "GetCustomersById"), Authorize]
+    public async Task<IActionResult> GetCustomerById(string id)
+    {
+        //Check if ID value is correct
+        if (Guid.TryParse(id, out Guid guidValue))
+        {
+            var customer = await _service.GetCustomerById(guidValue);
+
+            if(customer == null) return BadRequest($"Customer with id({id}) doesn't exist");
+
+            return Ok(customer);
+        }
+        else
+        {
+            return BadRequest("Invalid ID value");
+        }
+    }
+
+    [HttpGet("ssn", Name = "GetCUstomerBySsn"), Authorize]
+    public async Task<IActionResult> GetCustomerBySsn(string ssn)
+    {
+        var customer = await _service.GetCustomerBySsn(ssn);
+
+        if(customer == null) return BadRequest($"Customer with ssn({ssn}) doesn't exist");
+
+        return Ok(customer);
+        
+    }
+
         // Imports Customers from source
     [HttpPost("source", Name = "ImportSourceCustomers"), Authorize]
     public async Task<IActionResult> ImportSourceCustomers()

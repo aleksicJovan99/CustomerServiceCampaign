@@ -57,6 +57,28 @@ public class CustomerService : ICustomerService
         
     }
 
+    public async Task<CustomerDto> GetCustomerById(Guid customerId)
+    {
+         var customer = await _repository.Customer.GetCustomerByIdAsync(customerId);
+
+        if (customer == null) return null;
+
+        var result = _mapper.Map<CustomerDto>(customer);
+
+        return result;
+    }
+
+    public async Task<CustomerDto> GetCustomerBySsn(string customerSsn)
+    {
+        var customer = await _repository.Customer.GetCustomerBySsnAsync(customerSsn);
+
+        if (customer == null) return null;
+
+        var result = _mapper.Map<CustomerDto>(customer);
+
+        return result;
+    }
+
     public async Task<IEnumerable<CustomerDto>> GetCustomersList()
     {
         var customers = await _repository.Customer.GetCustomersAsync();
