@@ -19,7 +19,7 @@ public class CustomerController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpGet(Name = "GetCustomers")]
+    [HttpGet(Name = "GetCustomers"), Authorize]
     public async Task<IActionResult> GetCustomers()
     { 
         var result = await _service.GetCustomersList();
