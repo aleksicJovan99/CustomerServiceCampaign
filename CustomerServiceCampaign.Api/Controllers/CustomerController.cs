@@ -1,5 +1,7 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using Contracts;
+using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerServiceCampaign.Api;
@@ -38,8 +40,27 @@ public class CustomerController : ControllerBase
         if (isUpdated) return Ok("New data has been imported");
 
         return Ok("The data was already updated");
-            
-        
-                
+                    
+    }
+
+    [HttpPost("loyalty"), Authorize]
+    public async Task<IActionResult> CreateLoyaltyCustomer([FromBody] LoyaltyCustomerForCreate loyaltyCustomer)
+    {
+        string authorizationHeader = HttpContext.Request.Headers["Authorization"]; // Use HttpContext to access the Request object
+
+            // Check if the Authorization header is present and in the correct format
+            if (string.IsNullOrEmpty(authorizationHeader) || !authorizationHeader.StartsWith("Bearer "))
+            {
+                return BadRequest("Invalid Authorization header");
+            }
+
+            // Extract the token from the Authorization header
+            string token = authorizationHeader.Substring("Bearer ".Length).Trim();
+
+            var customer = await _service.CreateLoyaltyCustomer(loyaltyCustomer, token);
+
+            if (customer == null) return BadRequest("Customer can't be added to the Loyalty club ");
+
+            return Ok();
     }
 }
