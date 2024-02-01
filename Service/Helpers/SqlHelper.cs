@@ -39,6 +39,41 @@ public static class SqlHelper
         }        
     }
 
+    public static void InsertDataDynamic(Dictionary<dynamic, dynamic> dictionaryData, string connectionString, string tableName) 
+    {
+        // Check and add column if it doesn't exist
+        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        {
+            connection.Open();
+            var query = $"CREATE TABLE IF NOT EXISTS {tableName} (Id TEXT)";
+
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.ExecuteNonQuery();    
+
+            foreach (var pair in dictionaryData)
+            {
+                string columnName = pair.Key;
+
+                if (!IsColumnExists(columnName, tableName, connection))
+                {
+                    // Column doesn't exist, so add it to the table
+                    AddColumn(columnName, tableName, connection);
+                }
+            }
+
+            query = $"INSERT INTO {tableName} ({string.Join(", ", dictionaryData.Keys)}) VALUES ({string.Join(", ", dictionaryData.Keys.Select(key => "@" + key))})";
+
+            // Insert data into the table
+            command = new MySqlCommand(query, connection);
+            foreach (var pair in dictionaryData)
+            {
+                command.Parameters.AddWithValue("@" + pair.Key, pair.Value);
+            }
+
+            command.ExecuteNonQuery();    
+        }        
+    }
+
 
     private static bool IsColumnExists(string columnName, string tableName, MySqlConnection connection)
     {

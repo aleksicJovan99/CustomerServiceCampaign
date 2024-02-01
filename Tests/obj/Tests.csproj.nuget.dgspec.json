@@ -323,6 +323,10 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[30.1.0, )"
+            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[5.1.5, )"

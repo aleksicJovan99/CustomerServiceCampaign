@@ -1,11 +1,14 @@
-﻿using System.Globalization;
+﻿using System.Collections;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Web;
 using System.Xml.Linq;
 using AutoMapper;
 using Contracts;
+using CsvHelper;
 using Entities;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 
 namespace Service;
 public class CustomerService : ICustomerService
@@ -66,6 +69,35 @@ public class CustomerService : ICustomerService
         return result;
     }
 
+    // Imports customers from csv file
+    public async Task ImportCsvCustomers(Stream file, string connectionString)
+    {
+        var reader = new StreamReader(file);
+        var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+
+        var records = csv.GetRecords<dynamic>();
+
+
+        foreach (var record in records) 
+        {
+            var dictionary = new Dictionary<string, string>();
+
+            foreach (var r in record) 
+            {
+                var arr = new ArrayList();
+                var properties = r.GetType().GetProperties();
+
+                foreach (var property in properties)
+                {
+                    arr.Add(property.GetValue(r));
+                }
+                dictionary.Add(arr[0].ToString(), arr[1].ToString());
+            }
+            SqlHelper.InsertData(dictionary, connectionString, "CsvCustomers");
+        }
+        
+    }
+
     // Imports customers from a remote source
     public async Task ImportSourceCustomers(string connectionString)
     {
@@ -93,14 +125,11 @@ public class CustomerService : ICustomerService
                 }
 
                 var xmlString = response.Result.Content.ReadAsStringAsync().Result;
-                // Parse the XML string into an XElement
                 XDocument doc = XDocument.Parse(xmlString);
 
-                // Define namespaces
                 XNamespace soapEnv = "http://schemas.xmlsoap.org/soap/envelope/";
                 XNamespace tempuri = "http://tempuri.org";
 
-                // Get FindPersonResult element
                 var findPersonResult = doc.Descendants(tempuri + "FindPersonResult").FirstOrDefault();
 
                 if (findPersonResult == null) break;

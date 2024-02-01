@@ -75,4 +75,13 @@ public class CustomerController : ControllerBase
 
             return Ok();
     }
+
+    [HttpPost("csv")]
+    public async Task<IActionResult> ImportCsvCustomers([FromForm] IFormFileCollection file) 
+    {
+        var connectionString = _configuration.GetConnectionString("sqlConnection");
+        await _service.ImportCsvCustomers(file[0].OpenReadStream(), connectionString);
+
+        return Ok();
+    }
 }

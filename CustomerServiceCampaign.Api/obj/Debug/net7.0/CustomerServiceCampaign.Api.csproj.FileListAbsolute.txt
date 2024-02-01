@@ -127,3 +127,5 @@
 /Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/Microsoft.Extensions.Identity.Core.dll
 /Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/Microsoft.Extensions.Identity.Stores.dll
 /Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/CsvHelper.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/CustomerServiceCampaign.Api/bin/Debug/net7.0/System.Linq.Async.dll
