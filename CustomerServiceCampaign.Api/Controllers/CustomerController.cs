@@ -30,6 +30,35 @@ public class CustomerController : ControllerBase
                 
     }
 
+    [HttpGet("id", Name = "GetCustomersById"), Authorize]
+    public async Task<IActionResult> GetCustomerById(string id)
+    {
+        //Check if ID value is correct
+        if (Guid.TryParse(id, out Guid guidValue))
+        {
+            var customer = await _service.GetCustomerById(guidValue);
+
+            if(customer == null) return BadRequest($"Customer with id({id}) doesn't exist");
+
+            return Ok(customer);
+        }
+        else
+        {
+            return BadRequest("Invalid ID value");
+        }
+    }
+
+    [HttpGet("ssn", Name = "GetCUstomerBySsn"), Authorize]
+    public async Task<IActionResult> GetCustomerBySsn(string ssn)
+    {
+        var customer = await _service.GetCustomerBySsn(ssn);
+
+        if(customer == null) return BadRequest($"Customer with ssn({ssn}) doesn't exist");
+
+        return Ok(customer);
+        
+    }
+
         // Imports Customers from source
     [HttpPost("source", Name = "ImportSourceCustomers"), Authorize]
     public async Task<IActionResult> ImportSourceCustomers()
@@ -44,10 +73,13 @@ public class CustomerController : ControllerBase
 
     // Updates table of Customers with source data
     [HttpPost("update", Name = "UpdateCustomers"), Authorize]
-    public async Task<IActionResult> UpdateCustomers()
+    public async Task<IActionResult> UpdateCustomers(string updateFrom)
     { 
+        if (updateFrom.Trim() != "csv" && updateFrom.Trim() != "source") return BadRequest("Invalid parameters. Choose from (source, csv)");
+
         var connectionString = _configuration.GetConnectionString("sqlConnection");
-        var isUpdated = await _service.UpdateCustomersTable(connectionString);
+
+        var isUpdated = await _service.UpdateCustomersTable(connectionString, updateFrom);
 
         if (isUpdated) return Ok("New data has been imported");
 
@@ -74,5 +106,14 @@ public class CustomerController : ControllerBase
             if (customer == null) return BadRequest("Customer can't be added to the Loyalty club ");
 
             return Ok();
+    }
+
+    [HttpPost("csv"), Authorize]
+    public async Task<IActionResult> ImportCsvCustomers([FromForm] IFormFileCollection file) 
+    {
+        var connectionString = _configuration.GetConnectionString("sqlConnection");
+        await _service.ImportCsvCustomers(file[0].OpenReadStream(), connectionString);
+
+        return Ok();
     }
 }

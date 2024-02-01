@@ -1,9 +1,11 @@
-﻿using System.Globalization;
+﻿using System.Collections;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Web;
 using System.Xml.Linq;
 using AutoMapper;
 using Contracts;
+using CsvHelper;
 using Entities;
 using MySql.Data.MySqlClient;
 
@@ -55,6 +57,28 @@ public class CustomerService : ICustomerService
         
     }
 
+    public async Task<CustomerDto> GetCustomerById(Guid customerId)
+    {
+         var customer = await _repository.Customer.GetCustomerByIdAsync(customerId);
+
+        if (customer == null) return null;
+
+        var result = _mapper.Map<CustomerDto>(customer);
+
+        return result;
+    }
+
+    public async Task<CustomerDto> GetCustomerBySsn(string customerSsn)
+    {
+        var customer = await _repository.Customer.GetCustomerBySsnAsync(customerSsn);
+
+        if (customer == null) return null;
+
+        var result = _mapper.Map<CustomerDto>(customer);
+
+        return result;
+    }
+
     public async Task<IEnumerable<CustomerDto>> GetCustomersList()
     {
         var customers = await _repository.Customer.GetCustomersAsync();
@@ -64,6 +88,37 @@ public class CustomerService : ICustomerService
         var result = _mapper.Map<IEnumerable<CustomerDto>>(customers);
 
         return result;
+    }
+
+    // Imports customers from csv file
+    public async Task ImportCsvCustomers(Stream file, string connectionString)
+    {
+        var reader = new StreamReader(file);
+        var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+
+        var records = csv.GetRecords<dynamic>();
+
+
+        foreach (var record in records) 
+        {
+            var dictionary = new Dictionary<string, string>();
+
+            foreach (var r in record) 
+            {
+                var arr = new ArrayList();
+                var properties = r.GetType().GetProperties();
+
+                foreach (var property in properties)
+                {
+                    arr.Add(property.GetValue(r));
+                }
+                dictionary.Add(arr[0].ToString(), arr[1].ToString());
+            }
+
+            dictionary["ImportDate"] = DateTime.Now.ToString("yyyy'-'MM'-'dd");
+            SqlHelper.InsertData(dictionary, connectionString, "CsvCustomers");
+        }
+        
     }
 
     // Imports customers from a remote source
@@ -93,14 +148,11 @@ public class CustomerService : ICustomerService
                 }
 
                 var xmlString = response.Result.Content.ReadAsStringAsync().Result;
-                // Parse the XML string into an XElement
                 XDocument doc = XDocument.Parse(xmlString);
 
-                // Define namespaces
                 XNamespace soapEnv = "http://schemas.xmlsoap.org/soap/envelope/";
                 XNamespace tempuri = "http://tempuri.org";
 
-                // Get FindPersonResult element
                 var findPersonResult = doc.Descendants(tempuri + "FindPersonResult").FirstOrDefault();
 
                 if (findPersonResult == null) break;
@@ -136,8 +188,10 @@ public class CustomerService : ICustomerService
     }
 
     // Updates customers table based on imported data
-    public async Task<bool> UpdateCustomersTable(string connectionString)
+    public async Task<bool> UpdateCustomersTable(string connectionString, string updateFrom)
     {
+
+        string tableName = updateFrom.Equals("source") ? "SourceCustomers" : "CsvCustomers";
 
         var newDataCheck = false;
         using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -148,7 +202,7 @@ public class CustomerService : ICustomerService
             connection.Open();
                 
             string query = 
-                "SELECT Id, Name, SSN, DOB, HomeStreet, HomeCity, HomeState, HomeZip, OfficeStreet, OfficeCity, OfficeState, OfficeZip, Title, Salary, ImportDate  FROM SourceCustomers";
+                "SELECT Id, Name, SSN, DOB, HomeStreet, HomeCity, HomeState, HomeZip, OfficeStreet, OfficeCity, OfficeState, OfficeZip, Title, Salary, ImportDate  FROM " + tableName;
                 
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
@@ -156,16 +210,20 @@ public class CustomerService : ICustomerService
                 {
                     while (reader.Read())
                     {
+                        var ssn = SqlHelper.GetNullableString(reader, "SSN");
+                        if (ssn == null) continue;
+
+                        ssn = ssn.Replace("-", "");
+
                         Guid customerId = Guid.TryParse(SqlHelper.
                             GetNullableString(reader, "Id"), out Guid result) ?  result : Guid.NewGuid();
+
                         
-                        var checkCustomer = await _repository.Customer.GetCustomerByIdAsync(customerId);
+                        var checkCustomer = await _repository.Customer.GetCustomersAsync();
 
-                        if(checkCustomer != null) continue;
+                        if(checkCustomer.Where(c => c.Id == customerId || c.SSN == ssn).Any()) continue;
 
-                        var ssn = SqlHelper.GetNullableString(reader, "SSN");
 
-                        if (ssn == null) continue;
 
                         DateTime? birthDate = DateTime.
                             TryParseExact(SqlHelper.GetNullableString(reader, "DOB"), "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out DateTime birth)
@@ -181,7 +239,7 @@ public class CustomerService : ICustomerService
                         {
                             Id = customerId,
                             Name = SqlHelper.GetNullableString(reader, "Name"),
-                            SSN = ssn.Replace("-", ""),
+                            SSN = ssn,
                             Birthdate = birthDate,
                             HomeStreet = SqlHelper.GetNullableString(reader, "HomeStreet"),
                             HomeCity = SqlHelper.GetNullableString(reader, "HomeCity"),

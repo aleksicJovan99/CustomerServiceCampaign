@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cl/PGIZETPjpTmjCuU2RDbPZAhXOv8fUPJjUBcDCEEhvx1kB0SalDDIW+Mo/wdVrnFSarPJxYlY6WeXVLg61og==",
+  "dgSpecHash": "NTwQaeVPLZ/BQbtvFc6ogH7uURjl/g9Q/+P3b9Q4B+hKyFiC9F+MTeIqyejFYYuEvSb7lsLuYwUBaktO1WtDyg==",
   "success": true,
   "projectFilePath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/Service/Service.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "/Users/jovan/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",
     "/Users/jovan/.nuget/packages/bouncycastle.cryptography/2.2.1/bouncycastle.cryptography.2.2.1.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/csvhelper/30.1.0/csvhelper.30.1.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/google.protobuf/3.25.1/google.protobuf.3.25.1.nupkg.sha512",
     "/Users/jovan/.nuget/packages/k4os.compression.lz4/1.3.5/k4os.compression.lz4.1.3.5.nupkg.sha512",
     "/Users/jovan/.nuget/packages/k4os.compression.lz4.streams/1.3.5/k4os.compression.lz4.streams.1.3.5.nupkg.sha512",
@@ -57,6 +58,7 @@
     "/Users/jovan/.nuget/packages/system.io/4.3.0/system.io.4.3.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/system.io.filesystem.accesscontrol/5.0.0/system.io.filesystem.accesscontrol.5.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/system.io.pipelines/6.0.3/system.io.pipelines.6.0.3.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/system.linq.async/4.0.0/system.linq.async.4.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/system.memory/4.5.4/system.memory.4.5.4.nupkg.sha512",
     "/Users/jovan/.nuget/packages/system.memory.data/1.0.2/system.memory.data.1.0.2.nupkg.sha512",
     "/Users/jovan/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
