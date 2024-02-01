@@ -25,6 +25,8 @@ public class AuthenticationManager : IAuthenticationManager
         return _user != null && 
             await _userManager.CheckPasswordAsync(_user, userForAuth.Password);
     }
+
+        // Creates a JWT token for the authenticated user
     public async Task<string> CreateToken()
     {
         var signingCredentials = GetSigningCredentials();
@@ -33,6 +35,7 @@ public class AuthenticationManager : IAuthenticationManager
         return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
     }
 
+        // Retrieves signing credentials for JWT token
     private SigningCredentials GetSigningCredentials() 
     {
         var key = Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value!);
@@ -41,6 +44,7 @@ public class AuthenticationManager : IAuthenticationManager
         return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
     }
 
+    // Retrieves claims for JWT token
     private async Task<List<Claim>> GetClaims() 
     {
         var claims = new List<Claim> {
@@ -55,6 +59,7 @@ public class AuthenticationManager : IAuthenticationManager
         return claims; 
     }
 
+    // Generates options for JWT token
     private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
     {
         var jwtSettings = _configuration.GetSection("JwtSettings");

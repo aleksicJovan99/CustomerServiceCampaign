@@ -16,6 +16,7 @@ public class CustomerService : ICustomerService
         _repository = repository;
     }
 
+        // Imports customers from a remote source
     public async Task ImportSourceCustomers(string connectionString)
     {
         IEnumerable<dynamic> customers = null;
@@ -54,15 +55,12 @@ public class CustomerService : ICustomerService
 
                 if (findPersonResult == null) break;
             
-                // Create a dictionary to store values
                 Dictionary<string, string> values = new Dictionary<string, string>();
                 values["Id"] = Guid.NewGuid().ToString();
                 values["SourceId"] = id.ToString();
 
-                // Iterate through child elements and store their names and values in the dictionary
                 foreach (var element in findPersonResult.Elements())
                 {
-                    // Check if the element has child elements
                     if (element.HasElements)
                     {
                         foreach (var childElement in element.Elements())
@@ -72,7 +70,6 @@ public class CustomerService : ICustomerService
                     }
                     else
                     {
-                        // If it doesn't have child elements, store its value directly
                         values[element.Name.LocalName] = element.Value;
                     }
                 }
@@ -88,6 +85,7 @@ public class CustomerService : ICustomerService
         
     }
 
+    // Updates customers table based on imported data
     public async Task<bool> UpdateCustomersTable(string connectionString)
     {
 

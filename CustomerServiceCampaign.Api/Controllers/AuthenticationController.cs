@@ -26,6 +26,7 @@ namespace CustomerServiceCampaign.Api;
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
 
+            //Checking if the agent exists in the predefined table of agents
             if (userForRegistration.Role.ToLower() == "agent") 
             {
                 var agent = await _repository.Agent.GetAgentBySsnAsync(userForRegistration.SSN);

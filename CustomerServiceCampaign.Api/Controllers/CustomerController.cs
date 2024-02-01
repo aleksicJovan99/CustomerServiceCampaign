@@ -17,6 +17,7 @@ public class CustomerController : ControllerBase
         _configuration = configuration;
     }
 
+    // Get Customers from source
     [HttpPost("source", Name = "ImportSourceCustomers")]
     public async Task<IActionResult> ImportSourceCustomers()
     { 
@@ -27,6 +28,7 @@ public class CustomerController : ControllerBase
                 
     }
 
+    // Updates table of Customers with source data
     [HttpPost("update", Name = "UpdateCustomers")]
     public async Task<IActionResult> UpdateCustomers()
     { 
