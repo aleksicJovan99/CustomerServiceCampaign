@@ -202,3 +202,4 @@
 /Users/jovan/Documents/c#/CustomerServiceCampaign/Tests/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 /Users/jovan/Documents/c#/CustomerServiceCampaign/Tests/bin/Debug/net7.0/Microsoft.Extensions.Identity.Core.dll
 /Users/jovan/Documents/c#/CustomerServiceCampaign/Tests/bin/Debug/net7.0/Microsoft.Extensions.Identity.Stores.dll
+/Users/jovan/Documents/c#/CustomerServiceCampaign/Tests/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll

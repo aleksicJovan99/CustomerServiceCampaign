@@ -44,7 +44,7 @@ public class AuthenticationManager : IAuthenticationManager
     private async Task<List<Claim>> GetClaims() 
     {
         var claims = new List<Claim> {
-            new Claim(ClaimTypes.Name, _user.UserName) 
+            new Claim(ClaimTypes.UserData, _user.SSN) 
         };
         var roles = await _userManager.GetRolesAsync(_user); 
         foreach (var role in roles)
