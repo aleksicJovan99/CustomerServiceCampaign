@@ -14,9 +14,12 @@ public class RepositoryContext : IdentityDbContext<User>
 
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
+        modelBuilder.Entity<LoyaltyCustomer>()
+        .HasKey(lc => new { lc.AgentId, lc.CustomerId });
     }
 
     public DbSet<Agent> Agents { get; set; }
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<LoyaltyCustomer> LoyaltyCustomers { get; set; }
     
 }

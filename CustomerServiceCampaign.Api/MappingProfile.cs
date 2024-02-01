@@ -9,6 +9,8 @@ public class MappingProfile : Profile
         CreateMap<AgentForCreateDto, Agent>();
         CreateMap<UserForRegistrationDto, User>();
         CreateMap<Agent, AgentDto>();
+        CreateMap<Customer, CustomerDto>();
+
 
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
 using System.Web;
 using System.Xml.Linq;
+using AutoMapper;
 using Contracts;
 using Entities;
 using MySql.Data.MySqlClient;
@@ -10,13 +12,61 @@ public class CustomerService : ICustomerService
 {
 
     private readonly IRepositoryManager _repository;
+    private readonly IMapper _mapper;
 
-    public CustomerService(IRepositoryManager repository)
+
+    public CustomerService(IRepositoryManager repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
-        // Imports customers from a remote source
+    //add Customer to Loyalty Table
+    public async Task<LoyaltyCustomer> CreateLoyaltyCustomer(LoyaltyCustomerForCreate loyaltyCustomer, string token)
+    {
+        var customer = await _repository.Customer.GetCustomerBySsnAsync(loyaltyCustomer.Ssn);
+
+        if (customer == null) return null;
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var jwtToken = tokenHandler.ReadJwtToken(token);
+        var ssn = jwtToken.Claims.FirstOrDefault().Value;
+
+        var agent = await _repository.Agent.GetAgentBySsnAsync(ssn);
+        
+        if (agent == null) {return null;}
+
+        var loyaltyList =  await _repository.LoyaltyCustomers.GetCustomersAsync();
+
+        if (loyaltyList.Any(l => l.CustomerId == customer.Id) || 
+            (loyaltyList.Where(l => l.AgentId == agent.Id && l.DateAdded.Date == DateTime.Now.Date).Count() >= 5)) return null;
+                
+        var forCreate = new LoyaltyCustomer 
+        {
+            CustomerId = customer.Id,
+            AgentId = agent.Id,
+            DateAdded = DateTime.Now
+        }; 
+
+        _repository.LoyaltyCustomers.CreateCustomer(forCreate);
+        await _repository.SaveAsync();
+        
+        return forCreate;
+        
+    }
+
+    public async Task<IEnumerable<CustomerDto>> GetCustomersList()
+    {
+        var customers = await _repository.Customer.GetCustomersAsync();
+
+        if (customers == null) { return null; }
+
+        var result = _mapper.Map<IEnumerable<CustomerDto>>(customers);
+
+        return result;
+    }
+
+    // Imports customers from a remote source
     public async Task ImportSourceCustomers(string connectionString)
     {
         IEnumerable<dynamic> customers = null;
@@ -113,6 +163,10 @@ public class CustomerService : ICustomerService
 
                         if(checkCustomer != null) continue;
 
+                        var ssn = SqlHelper.GetNullableString(reader, "SSN");
+
+                        if (ssn == null) continue;
+
                         DateTime? birthDate = DateTime.
                             TryParseExact(SqlHelper.GetNullableString(reader, "DOB"), "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out DateTime birth)
                                 ? birth : null; 
@@ -120,12 +174,14 @@ public class CustomerService : ICustomerService
                         DateTime importDate = DateTime.
                             TryParseExact(SqlHelper.GetNullableString(reader, "ImportDate"), "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out DateTime import)
                                 ? import : DateTime.Now;
+                        
+
 
                         customer = new Customer
                         {
                             Id = customerId,
                             Name = SqlHelper.GetNullableString(reader, "Name"),
-                            SSN = SqlHelper.GetNullableString(reader, "SSN"),
+                            SSN = ssn.Replace("-", ""),
                             Birthdate = birthDate,
                             HomeStreet = SqlHelper.GetNullableString(reader, "HomeStreet"),
                             HomeCity = SqlHelper.GetNullableString(reader, "HomeCity"),
