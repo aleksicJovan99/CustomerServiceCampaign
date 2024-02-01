@@ -79,7 +79,7 @@ public class CustomerController : ControllerBase
             return Ok();
     }
 
-    [HttpPost("csv")]
+    [HttpPost("csv"), Authorize]
     public async Task<IActionResult> ImportCsvCustomers([FromForm] IFormFileCollection file) 
     {
         var connectionString = _configuration.GetConnectionString("sqlConnection");
