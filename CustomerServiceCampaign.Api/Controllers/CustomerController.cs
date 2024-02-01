@@ -20,7 +20,7 @@ public class CustomerController : ControllerBase
     }
 
     // Get Customers from source
-    [HttpPost("source", Name = "ImportSourceCustomers")]
+    [HttpPost("source", Name = "ImportSourceCustomers"), Authorize]
     public async Task<IActionResult> ImportSourceCustomers()
     { 
         var connectionString = _configuration.GetConnectionString("sqlConnection");
@@ -30,8 +30,9 @@ public class CustomerController : ControllerBase
                 
     }
 
+
     // Updates table of Customers with source data
-    [HttpPost("update", Name = "UpdateCustomers")]
+    [HttpPost("update", Name = "UpdateCustomers"), Authorize]
     public async Task<IActionResult> UpdateCustomers()
     { 
         var connectionString = _configuration.GetConnectionString("sqlConnection");
@@ -43,7 +44,7 @@ public class CustomerController : ControllerBase
                     
     }
 
-    [HttpPost("loyalty"), Authorize]
+    [HttpPost("loyalty"), Authorize(Roles = "agent")]
     public async Task<IActionResult> CreateLoyaltyCustomer([FromBody] LoyaltyCustomerForCreate loyaltyCustomer)
     {
         string authorizationHeader = HttpContext.Request.Headers["Authorization"]; // Use HttpContext to access the Request object

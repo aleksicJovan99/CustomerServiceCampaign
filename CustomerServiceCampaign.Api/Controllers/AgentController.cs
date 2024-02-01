@@ -16,7 +16,7 @@ public class AgentController : ControllerBase
         _service = service;
     }
 
-    [HttpGet(Name = "GetAgents"), Authorize]
+    [HttpGet(Name = "GetAgents"), Authorize(Roles = "sysadmin")]
     public async Task<IActionResult> GetAgents()
     { 
         var result = await _service.GetAgentsList();
@@ -27,7 +27,7 @@ public class AgentController : ControllerBase
                 
     }
 
-    [HttpGet("id", Name = "GetAgentById")]
+    [HttpGet("id", Name = "GetAgentById"), Authorize(Roles = "sysadmin")]
     public async Task<IActionResult> GetAgentById(string id)
     {
         //Check if ID value is correct
@@ -45,7 +45,7 @@ public class AgentController : ControllerBase
         }
     }
 
-    [HttpGet("ssn", Name = "GetAgentBySsn")]
+    [HttpGet("ssn", Name = "GetAgentBySsn"), Authorize(Roles = "sysadmin")]
     public async Task<IActionResult> GetAgentBySsn(string ssn)
     {
         var agent = await _service.GetAgentBySsn(ssn);
@@ -57,7 +57,7 @@ public class AgentController : ControllerBase
     }
     
 
-    [HttpPost(Name = "Create Agent")]
+    [HttpPost(Name = "Create Agent"), Authorize(Roles = "sysadmin")]
     public async Task<IActionResult> CreateAgent(AgentForCreateDto agent)
     {
         if (agent == null) 
