@@ -1,19 +1,26 @@
 {
   "version": 2,
-  "dgSpecHash": "sdCfBJ1GuGZT56jodsk2dCtU6ncyCYE5+rmjvA7MSH0Gg7w2BGjpVmMUx7v+fW9DtDsuHweW8TtRO97Ro4t9sw==",
+  "dgSpecHash": "HB7/ns7BIY/QbgeF5PTNGsyKNqmbvydcVLzyeM0xXEjwRS8gr8+YSTnXplM+oiYGAFXc8AUD1N/0lj49DYYVOQ==",
   "success": true,
   "projectFilePath": "/Users/jovan/Documents/c#/CustomerServiceCampaign/Contracts/Contracts.csproj",
   "expectedPackageFiles": [
+    "/Users/jovan/.nuget/packages/microsoft.aspnetcore.cryptography.internal/7.0.15/microsoft.aspnetcore.cryptography.internal.7.0.15.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/7.0.15/microsoft.aspnetcore.cryptography.keyderivation.7.0.15.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/7.0.15/microsoft.aspnetcore.identity.entityframeworkcore.7.0.15.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.entityframeworkcore/7.0.15/microsoft.entityframeworkcore.7.0.15.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.15/microsoft.entityframeworkcore.abstractions.7.0.15.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.entityframeworkcore.analyzers/7.0.15/microsoft.entityframeworkcore.analyzers.7.0.15.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.entityframeworkcore.relational/7.0.15/microsoft.entityframeworkcore.relational.7.0.15.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.caching.abstractions/7.0.0/microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.caching.memory/7.0.0/microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.extensions.configuration.abstractions/7.0.0/microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.dependencyinjection/7.0.0/microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/7.0.0/microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.extensions.identity.core/7.0.15/microsoft.extensions.identity.core.7.0.15.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.extensions.identity.stores/7.0.15/microsoft.extensions.identity.stores.7.0.15.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.logging/7.0.0/microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
-    "/Users/jovan/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
+    "/Users/jovan/.nuget/packages/microsoft.extensions.options/7.0.1/microsoft.extensions.options.7.0.1.nupkg.sha512",
     "/Users/jovan/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512"
   ],
   "logs": []

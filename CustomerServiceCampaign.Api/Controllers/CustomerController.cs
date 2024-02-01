@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using System.Reflection.Metadata.Ecma335;
+using Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerServiceCampaign.Api;
@@ -16,13 +17,29 @@ public class CustomerController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpPost(Name = "ImportSourceCustomers")]
+    // Get Customers from source
+    [HttpPost("source", Name = "ImportSourceCustomers")]
     public async Task<IActionResult> ImportSourceCustomers()
     { 
         var connectionString = _configuration.GetConnectionString("sqlConnection");
-        await _service.GetSourceCustomers(connectionString);
+        await _service.ImportSourceCustomers(connectionString);
             
         return Ok();
+                
+    }
+
+    // Updates table of Customers with source data
+    [HttpPost("update", Name = "UpdateCustomers")]
+    public async Task<IActionResult> UpdateCustomers()
+    { 
+        var connectionString = _configuration.GetConnectionString("sqlConnection");
+        var isUpdated = await _service.UpdateCustomersTable(connectionString);
+
+        if (isUpdated) return Ok("New data has been imported");
+
+        return Ok("The data was already updated");
+            
+        
                 
     }
 }

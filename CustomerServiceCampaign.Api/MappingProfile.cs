@@ -7,6 +7,7 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<AgentForCreateDto, Agent>();
+        CreateMap<UserForRegistrationDto, User>();
         CreateMap<Agent, AgentDto>();
 
     }

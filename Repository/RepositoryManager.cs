@@ -6,6 +6,7 @@ public class RepositoryManager : IRepositoryManager
 {
     private RepositoryContext _context;
     private IAgentRepository _agentRepository;
+    private ICustomerRepository _customerRepository;
 
     public RepositoryManager(RepositoryContext context)
     {
@@ -20,6 +21,17 @@ public class RepositoryManager : IRepositoryManager
                 _agentRepository = new AgentRepository(_context);
 
             return _agentRepository;
+        }
+    }
+
+    public ICustomerRepository Customer 
+    {
+        get
+        {
+            if(_customerRepository == null)
+                _customerRepository = new CustomerRepository(_context);
+
+            return _customerRepository;
         }
     }
 

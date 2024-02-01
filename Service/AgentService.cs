@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using AutoMapper.Configuration.Annotations;
 using Contracts;
 using Entities;
 
