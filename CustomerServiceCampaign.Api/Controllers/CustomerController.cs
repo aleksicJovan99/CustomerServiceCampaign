@@ -44,10 +44,13 @@ public class CustomerController : ControllerBase
 
     // Updates table of Customers with source data
     [HttpPost("update", Name = "UpdateCustomers"), Authorize]
-    public async Task<IActionResult> UpdateCustomers()
+    public async Task<IActionResult> UpdateCustomers(string updateFrom)
     { 
+        if (updateFrom.Trim() != "csv" && updateFrom.Trim() != "source") return BadRequest("Invalid parameters. Choose from (source, csv)");
+
         var connectionString = _configuration.GetConnectionString("sqlConnection");
-        var isUpdated = await _service.UpdateCustomersTable(connectionString);
+
+        var isUpdated = await _service.UpdateCustomersTable(connectionString, updateFrom);
 
         if (isUpdated) return Ok("New data has been imported");
 

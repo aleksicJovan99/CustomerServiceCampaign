@@ -92,6 +92,8 @@ public class CustomerService : ICustomerService
                 }
                 dictionary.Add(arr[0].ToString(), arr[1].ToString());
             }
+
+            dictionary["ImportDate"] = DateTime.Now.ToString("yyyy'-'MM'-'dd");
             SqlHelper.InsertData(dictionary, connectionString, "CsvCustomers");
         }
         
@@ -164,8 +166,10 @@ public class CustomerService : ICustomerService
     }
 
     // Updates customers table based on imported data
-    public async Task<bool> UpdateCustomersTable(string connectionString)
+    public async Task<bool> UpdateCustomersTable(string connectionString, string updateFrom)
     {
+
+        string tableName = updateFrom.Equals("source") ? "SourceCustomers" : "CsvCustomers";
 
         var newDataCheck = false;
         using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -176,7 +180,7 @@ public class CustomerService : ICustomerService
             connection.Open();
                 
             string query = 
-                "SELECT Id, Name, SSN, DOB, HomeStreet, HomeCity, HomeState, HomeZip, OfficeStreet, OfficeCity, OfficeState, OfficeZip, Title, Salary, ImportDate  FROM SourceCustomers";
+                "SELECT Id, Name, SSN, DOB, HomeStreet, HomeCity, HomeState, HomeZip, OfficeStreet, OfficeCity, OfficeState, OfficeZip, Title, Salary, ImportDate  FROM " + tableName;
                 
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
